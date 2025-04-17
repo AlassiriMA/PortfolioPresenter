@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
 
-    --primary: 214 84% 56%;
+    --primary: 145 65% 30%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 95%;
@@ -22,17 +22,19 @@
     --muted: 0 0% 95%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 214 84% 56%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 80% 50%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 214 84% 56%;
+    --ring: 145 65% 30%;
 
     --radius: 0.25rem;
+    
+    --gold: 45 80% 50%;
   }
 }
 
@@ -71,6 +73,18 @@
     @apply bg-primary text-primary-foreground;
   }
 
+  .gold-text {
+    @apply text-accent;
+  }
+
+  .gold-bg {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  .super-bold {
+    @apply font-black;
+  }
+
   .skill-bar {
     @apply h-1.5 bg-secondary overflow-hidden;
   }
@@ -80,15 +94,15 @@
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-medium mb-4;
+    @apply text-4xl md:text-5xl font-black mb-4;
   }
   
   .section-divider {
-    @apply h-px w-24 bg-primary mb-12;
+    @apply h-1 w-24 bg-accent mb-12;
   }
 
   .section-divider-center {
-    @apply h-px w-24 bg-primary mx-auto mb-8;
+    @apply h-1 w-24 bg-accent mx-auto mb-8;
   }
   
   .container {
@@ -102,9 +116,13 @@
   .grid-container {
     @apply grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12;
   }
+
+  .gold-accent {
+    @apply border-accent border-2;
+  }
 }
 
-@keyframes scroll-left {
+@keyframes marquee-left {
   0% {
     transform: translateX(0);
   }
@@ -113,7 +131,7 @@
   }
 }
 
-@keyframes scroll-right {
+@keyframes marquee-right {
   0% {
     transform: translateX(-50%);
   }
@@ -122,12 +140,12 @@
   }
 }
 
-.animate-scroll-left {
-  animation: scroll-left linear infinite;
+.animate-marquee-left {
+  animation: marquee-left linear infinite;
 }
 
-.animate-scroll-right {
-  animation: scroll-right linear infinite;
+.animate-marquee-right {
+  animation: marquee-right linear infinite;
 }
 
 /* Project card hover effect */

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDown, FileText } from "lucide-react";
+import { Download, FileText } from "lucide-react";
 
 const CVSection: React.FC = () => {
   return (
@@ -10,26 +10,28 @@ const CVSection: React.FC = () => {
         
         <div className="grid-container">
           <div className="md:col-span-6">
-            <h3 className="text-2xl font-medium mb-6">Professional Summary</h3>
-            <p className="text-lg text-muted-foreground mb-6">
+            <h3 className="text-2xl font-black mb-6 text-primary">Professional Summary</h3>
+            <p className="text-xl text-muted-foreground mb-6">
               Full Stack Developer and technology enthusiast with experience in building modern web applications, 
               cloud infrastructure solutions, and integrating AI capabilities into software products.
             </p>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-xl text-muted-foreground mb-6">
               Specialized in JavaScript/TypeScript ecosystem and React-based applications, 
               with a strong understanding of backend development using Node.js, Express, and databases 
               like PostgreSQL and MongoDB.
             </p>
-            <p className="text-lg text-muted-foreground">
-              Passionate about clean code, automation, and creating intuitive user experiences.
+            <p className="text-xl text-muted-foreground">
+              Passionate about <span className="font-black text-primary">clean code</span>, 
+              <span className="font-black gold-text"> automation</span>, and 
+              <span className="font-black text-primary"> intuitive user experiences</span>.
             </p>
           </div>
           
           <div className="md:col-span-6 mt-10 md:mt-0">
-            <div className="border border-border p-8 h-full flex flex-col justify-between bg-secondary/50">
+            <div className="border-2 border-accent p-8 h-full flex flex-col justify-between bg-white shadow-lg">
               <div>
-                <h3 className="text-2xl font-medium mb-6">Download CV</h3>
-                <p className="text-muted-foreground mb-8">
+                <h3 className="text-2xl font-black mb-6 text-primary">Download CV</h3>
+                <p className="text-xl text-muted-foreground mb-8">
                   For a more detailed overview of my experience, skills, and qualifications, 
                   download my complete curriculum vitae in PDF format.
                 </p>
@@ -39,10 +41,10 @@ const CVSection: React.FC = () => {
                 <a 
                   href="/assets/alassiri_cv_apr_25.pdf" 
                   download 
-                  className="inline-flex items-center px-8 py-4 accent-bg gap-2 hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center px-10 py-5 gold-bg gap-3 hover:opacity-90 transition-opacity shadow-md"
                 >
-                  <FileText className="h-5 w-5" />
-                  <span className="font-medium">Download CV</span>
+                  <Download className="h-6 w-6" />
+                  <span className="font-black text-lg">Download CV</span>
                 </a>
               </div>
             </div>
