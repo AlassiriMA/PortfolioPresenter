@@ -28,30 +28,33 @@ const TechScroller: React.FC<TechScrollerProps> = ({
     setHoveredTech(null);
   };
   
-  const getTechColor = (category: string) => {
+  // Return the appropriate design based on category
+  const getTechClass = (category: string) => {
+    const baseClass = "bg-white border-accent"; // Common styles
+    
     switch (category) {
       case 'frontend':
-        return 'bg-blue-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'backend':
-        return 'bg-green-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'database':
-        return 'bg-indigo-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'devops':
-        return 'bg-orange-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'cloud':
-        return 'bg-cyan-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'ai-ml':
-        return 'bg-purple-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'mobile':
-        return 'bg-pink-50 border-primary';
+        return `${baseClass} text-primary`;
       case 'other':
-        return 'bg-gray-50 border-primary';
+        return `${baseClass} text-primary`;
       default:
-        return 'bg-gray-50 border-primary';
+        return `${baseClass} text-primary`;
     }
   };
 
-  const animationDuration = `${Math.max(20, technologies.length * (speed / 5))}s`;
+  const animationDuration = `${Math.max(40, technologies.length * (speed / 10))}s`;
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -66,18 +69,18 @@ const TechScroller: React.FC<TechScrollerProps> = ({
         {[...technologies, ...technologies].map((tech, index) => (
           <div
             key={`${tech.name}-${index}`}
-            className={`inline-flex px-4 py-2 border-2 ${getTechColor(tech.category)} shadow-sm rounded cursor-pointer transition-all duration-200 transform hover:scale-110 hover:border-accent relative`}
+            className={`inline-flex px-4 py-2 border-2 ${getTechClass(tech.category)} shadow-md rounded-full cursor-pointer transition-all duration-200 transform hover:scale-110 hover:border-accent hover:shadow-lg relative`}
             onMouseEnter={() => handleTechHover(tech.name)}
             onMouseLeave={handleTechLeave}
           >
-            <span className="text-gray-800 whitespace-nowrap font-bold">{tech.name}</span>
+            <span className="whitespace-nowrap font-bold">{tech.name}</span>
             
             {/* Tooltip that shows on hover */}
             {hoveredTech === tech.name && (
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white border-2 border-accent rounded shadow-lg p-4 z-10 w-64">
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white border-2 border-accent rounded-lg shadow-xl p-4 z-10 w-64">
                 <div className="flex flex-col">
                   <span className="font-black text-primary text-lg">{tech.name}</span>
-                  <span className="text-xs uppercase text-gray-500 mb-2 font-bold">{tech.category.replace('-', '/')}</span>
+                  <span className="text-xs uppercase gold-text mb-2 font-bold">{tech.category.replace('-', ' & ')}</span>
                   <span className="text-sm text-gray-700">{tech.description}</span>
                 </div>
                 <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 rotate-45 w-4 h-4 bg-white border-r-2 border-b-2 border-accent"></div>
