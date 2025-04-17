@@ -16,11 +16,6 @@ export const frontendSkills: Skill[] = [
     percentage: 85,
   },
   {
-    name: "HTML/CSS",
-    level: "Expert",
-    percentage: 95,
-  },
-  {
     name: "Tailwind CSS",
     level: "Advanced",
     percentage: 90,
@@ -28,7 +23,12 @@ export const frontendSkills: Skill[] = [
   {
     name: "TypeScript",
     level: "Intermediate",
-    percentage: 75,
+    percentage: 80,
+  },
+  {
+    name: "HTML/CSS",
+    level: "Advanced",
+    percentage: 90,
   },
 ];
 
@@ -39,32 +39,37 @@ export const backendSkills: Skill[] = [
     percentage: 85,
   },
   {
-    name: "Express",
-    level: "Advanced",
-    percentage: 80,
+    name: "Python",
+    level: "Intermediate",
+    percentage: 75,
   },
   {
-    name: "SQL",
+    name: "Django/Flask",
     level: "Intermediate",
     percentage: 70,
+  },
+  {
+    name: "PostgreSQL",
+    level: "Advanced",
+    percentage: 85,
   },
   {
     name: "MongoDB",
     level: "Intermediate",
     percentage: 75,
   },
-  {
-    name: "Drizzle ORM",
-    level: "Advanced",
-    percentage: 85,
-  },
 ];
 
 export const devOpsSkills: Skill[] = [
   {
-    name: "Git/GitHub",
-    level: "Advanced",
-    percentage: 90,
+    name: "AWS",
+    level: "Intermediate",
+    percentage: 70,
+  },
+  {
+    name: "Google Cloud",
+    level: "Intermediate",
+    percentage: 75,
   },
   {
     name: "Docker",
@@ -72,19 +77,14 @@ export const devOpsSkills: Skill[] = [
     percentage: 70,
   },
   {
-    name: "AWS",
-    level: "Basic",
-    percentage: 60,
-  },
-  {
-    name: "CI/CD",
-    level: "Intermediate",
-    percentage: 75,
-  },
-  {
-    name: "Vercel",
+    name: "GitHub/GitLab",
     level: "Advanced",
-    percentage: 85,
+    percentage: 90,
+  },
+  {
+    name: "Firebase",
+    level: "Intermediate",
+    percentage: 80,
   },
 ];
 
@@ -95,23 +95,23 @@ export const specialtySkills: Skill[] = [
     percentage: 75,
   },
   {
-    name: "Next.js",
-    level: "Advanced",
-    percentage: 85,
+    name: "TensorFlow/PyTorch",
+    level: "Basic",
+    percentage: 60,
   },
   {
-    name: "RESTful APIs",
-    level: "Advanced",
-    percentage: 90,
-  },
-  {
-    name: "Web Accessibility",
+    name: "OpenAI Integration",
     level: "Intermediate",
     percentage: 70,
   },
   {
-    name: "Test-Driven Development",
+    name: "Web3/Ethereum",
     level: "Intermediate",
     percentage: 65,
+  },
+  {
+    name: "Trading Automation",
+    level: "Advanced",
+    percentage: 80,
   },
 ];

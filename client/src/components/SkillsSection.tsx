@@ -1,31 +1,27 @@
 import React from "react";
-import { Monitor, Server, Database, Zap } from "lucide-react";
+import { Monitor, Server, Cloud, Zap } from "lucide-react";
 import SkillBar from "./SkillBar";
 import { frontendSkills, backendSkills, devOpsSkills, specialtySkills } from "../data/skills";
 
 const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Skills & Expertise</h2>
-          <div className="section-divider-center"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            A comprehensive overview of my technical skills and proficiency levels across different domains of software development.
-          </p>
-        </div>
+    <section id="skills" className="section">
+      <div className="container">
+        <h2 className="section-title">Skills & Expertise</h2>
+        <div className="section-divider"></div>
+        <p className="text-muted-foreground max-w-2xl mb-12">
+          A comprehensive overview of my technical skills and proficiency levels across different domains of software development.
+        </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+        <div className="grid-container gap-y-10">
           {/* Frontend Skills */}
-          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
-                <Monitor className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold">Frontend</h3>
+          <div className="md:col-span-6 border-t border-l border-r border-border">
+            <div className="p-6 flex items-center">
+              <Monitor className="h-5 w-5 text-primary mr-3" />
+              <h3 className="text-lg font-medium">Frontend Development</h3>
             </div>
             
-            <div className="space-y-5">
+            <div className="px-6 pb-6 space-y-6">
               {frontendSkills.map((skill) => (
                 <SkillBar 
                   key={skill.name}
@@ -38,15 +34,13 @@ const SkillsSection: React.FC = () => {
           </div>
           
           {/* Backend Skills */}
-          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
-                <Server className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold">Backend</h3>
+          <div className="md:col-span-6 border-t border-l border-r md:border-l-0 border-border">
+            <div className="p-6 flex items-center">
+              <Server className="h-5 w-5 text-primary mr-3" />
+              <h3 className="text-lg font-medium">Backend Development</h3>
             </div>
             
-            <div className="space-y-5">
+            <div className="px-6 pb-6 space-y-6">
               {backendSkills.map((skill) => (
                 <SkillBar 
                   key={skill.name}
@@ -59,15 +53,13 @@ const SkillsSection: React.FC = () => {
           </div>
           
           {/* DevOps & Cloud */}
-          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
-                <Database className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold">DevOps & Cloud</h3>
+          <div className="md:col-span-6 border border-border">
+            <div className="p-6 flex items-center">
+              <Cloud className="h-5 w-5 text-primary mr-3" />
+              <h3 className="text-lg font-medium">Cloud & DevOps</h3>
             </div>
             
-            <div className="space-y-5">
+            <div className="px-6 pb-6 space-y-6">
               {devOpsSkills.map((skill) => (
                 <SkillBar 
                   key={skill.name}
@@ -80,15 +72,13 @@ const SkillsSection: React.FC = () => {
           </div>
           
           {/* Specialty Skills */}
-          <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-md">
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mr-4">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold">Specialty Skills</h3>
+          <div className="md:col-span-6 border border-t-0 md:border-t border-l border-r border-b md:border-l-0 border-border">
+            <div className="p-6 flex items-center">
+              <Zap className="h-5 w-5 text-primary mr-3" />
+              <h3 className="text-lg font-medium">Specialty Skills</h3>
             </div>
             
-            <div className="space-y-5">
+            <div className="px-6 pb-6 space-y-6">
               {specialtySkills.map((skill) => (
                 <SkillBar 
                   key={skill.name}

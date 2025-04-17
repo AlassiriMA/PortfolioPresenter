@@ -1,0 +1,193 @@
+Create a minimalist and elegant personal portfolio website for Mohammad A. Alassiri, inspired by the Swiss Design (International Typographic Style). The visual identity should be clean, grid-aligned, typography-focused, and content-driven. White background, black text, and smart, limited use of accent colors (like blue, soft red, or yellow for CTAs and tags).
+
+🎨 UI/UX & Design Requirements
+Swiss/International Style:
+
+Clean white background
+
+Large, readable sans-serif fonts (inter, manrope, or Helvetica Neue)
+
+Fixed baseline grid with proper vertical rhythm
+
+Clean section spacing with strong visual hierarchy
+
+Use minimal colorful highlights (buttons, section headings, icons)
+
+No unnecessary shadows, no gradients (unless subtle)
+
+UI Enhancements:
+
+Better spacing & breathing room
+
+Sticky navigation bar with section highlighting
+
+Subtle hover effects (underline slide, icon shift, opacity fade)
+
+Optional: smooth scroll animations with Framer Motion
+
+Optional: add project filter or sorting option
+
+🧱 Tech Stack
+React 18 + TypeScript
+
+Tailwind CSS (configured for typographic scales)
+
+Shadcn/UI or Radix UI
+
+Vite or CRA
+
+React Router (if multipage) or SPA with scroll navigation
+
+Formspree for contact form integration
+
+Endpoint: https://formspree.io/f/mldjydvd
+
+🔧 Functional Requirements
+Sections to include:
+
+Navigation Bar
+
+Logo text (Mohammad A. Alassiri)
+
+Links: Home, About, Skills, Projects, CV, Contact
+
+Use scroll spy or active state on scroll
+
+Hero Section
+
+Text only (no big hero image)
+
+Headline:
+
+mathematica
+Copy
+Edit
+Full Stack Developer
+Designing Systems. Building Solutions.
+Subtext:
+
+I craft clean, scalable, and user-focused applications powered by modern web technologies.
+
+Buttons: View Projects (scroll), Get In Touch (scroll)
+
+About Section
+
+Content pulled from my CV (include career highlights)
+
+Roles, expertise, and a short paragraph about my software & operational background
+
+Display photo optional (minimal, in a circle or square frame)
+
+Skills Section
+
+Grouped categories: Frontend, Backend, Cloud, Specialties
+
+Use icon-based grid or elegant bars/dots for proficiency
+
+Labels + subtle borders for separation
+
+Projects Section
+
+4–6 projects displayed in cards
+
+Each project card:
+
+Name
+
+Tech stack
+
+Short paragraph
+
+View Demo & GitHub buttons
+
+Optional: filter by category (AI, POS, E-commerce)
+
+CV Section
+
+Display highlights from the resume (e.g., key roles, tools, languages)
+
+Add a button to download the full CV as PDF
+
+(You’ll upload the file as public/mohammad-alassiri-cv.pdf)
+
+Contact Section
+
+Form with name, email, message
+
+Submit via:
+
+ini
+Copy
+Edit
+action="https://formspree.io/f/mldjydvd"
+method="POST"
+Confirmation message or thank-you alert after submit
+
+Social links: GitHub, LinkedIn
+
+⚙️ Additional Features
+Fully responsive layout
+
+Use Tailwind’s typography plugin
+
+SEO: Add meta tags (title, description, OpenGraph, Twitter Card, favicon)
+
+Downloadable CV file (mohammad-alassiri-cv.pdf)
+
+Fallback images with alt text
+
+Clean routing fallback for GitHub Pages
+
+Smooth scroll behavior
+
+Contact form error handling and success message
+
+💡 Polish & Optional Enhancements
+Subtle scroll animations (Framer Motion)
+
+"Back to Top" button in footer
+
+Add Google Fonts or custom font from Inter or Manrope
+
+Light/dark toggle (optional)
+
+Include robots.txt and sitemap
+
+📂 Folder Structure (recommended)
+pgsql
+Copy
+Edit
+src/
+  components/
+  sections/
+  assets/
+  styles/
+  App.tsx
+  index.tsx
+public/
+  favicon.ico
+  mohammad-alassiri-cv.pdf
+🔁 Deployment
+Use GitHub Actions for auto-deploy to GitHub Pages
+
+Add a simple .github/workflows/deploy.yml for CI/CD
+
+✨ Final Notes:
+Use my CV content to update the About and Skills sections. Make sure the tone and content reflect both my technical abilities and operational experience, including:
+
+POS system, e-commerce, DeFi bots, AI content tools
+
+Event operations and team management
+
+Tools like Sitecore, WordPress, ClickUp, Teams
+
+This portfolio should feel light, elegant, and thoughtfully made — like a clean design system, not a flashy theme.
+
+Let me know if you need a link to the CV PDF or want help formatting the meta tags or writing final texts for each section.
+
+
+
+
+
+
+
