@@ -11,11 +11,24 @@ const AboutSection: React.FC = () => {
         <div className="grid-container items-center gap-12">
           <div className="md:col-span-6">
             <div className="bg-white border border-border shadow-lg overflow-hidden">
-              <div className="aspect-square w-full h-full bg-muted">
-                {/* We'll use a div as a placeholder for the profile image */}
-                <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center">
-                  <span className="text-8xl font-medium tracking-tighter text-primary">MA</span>
-                </div>
+              <div className="aspect-square w-full h-full bg-muted overflow-hidden">
+                {/* Display profile image */}
+                <img 
+                  src="/assets/profile-image.jpg" 
+                  alt="Mohammad A. Alassiri" 
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback if image doesn't load
+                    e.currentTarget.style.display = 'none';
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      const fallback = document.createElement('div');
+                      fallback.className = "w-full h-full bg-gradient-to-br from-primary/10 to-primary/30 flex items-center justify-center";
+                      fallback.innerHTML = '<span class="text-8xl font-medium tracking-tighter text-primary">MA</span>';
+                      parent.appendChild(fallback);
+                    }
+                  }}
+                />
               </div>
             </div>
           </div>

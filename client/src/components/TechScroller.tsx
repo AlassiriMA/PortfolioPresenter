@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import allTechnologies from '../data/technologies';
+import React, { useState, useRef, useEffect } from 'react';
+import { allTechnologies } from '../data/technologies';
 
 interface TechScrollerProps {
   direction?: 'left' | 'right';
@@ -13,12 +13,43 @@ const TechScroller: React.FC<TechScrollerProps> = ({
   className = ''
 }) => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   
   // Get a subset of technologies for this row
   const technologies = allTechnologies.slice(
-    direction === 'left' ? 0 : allTechnologies.length / 2, 
-    direction === 'left' ? allTechnologies.length / 2 : allTechnologies.length
+    direction === 'left' ? 0 : Math.floor(allTechnologies.length / 2), 
+    direction === 'left' ? Math.floor(allTechnologies.length / 2) : allTechnologies.length
   );
+
+  useEffect(() => {
+    const scrollElement = scrollRef.current;
+    if (!scrollElement) return;
+    
+    let animationId: number;
+    let position = 0;
+    const pixelsPerFrame = direction === 'left' ? -0.5 : 0.5;
+    
+    const animate = () => {
+      if (!scrollElement || hoveredTech) return;
+      
+      position += pixelsPerFrame;
+      
+      // Reset position when it gets too far to create seamless loop
+      const containerWidth = scrollElement.scrollWidth / 2;
+      if (Math.abs(position) >= containerWidth) {
+        position = 0;
+      }
+      
+      scrollElement.style.transform = `translateX(${position}px)`;
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animationId = requestAnimationFrame(animate);
+    
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [direction, hoveredTech]);
 
   const handleTechHover = (techName: string) => {
     setHoveredTech(techName);
@@ -54,17 +85,17 @@ const TechScroller: React.FC<TechScrollerProps> = ({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <div
-        className={`flex gap-4 animate-scroll-${direction}`}
+        ref={scrollRef}
+        className="flex gap-4 whitespace-nowrap"
         style={{
-          animationDuration: `${technologies.length * speed}s`,
-          animationPlayState: hoveredTech ? 'paused' : 'running',
+          willChange: 'transform',
         }}
       >
         {/* Double the items to create a seamless loop */}
         {[...technologies, ...technologies].map((tech, index) => (
           <div
             key={`${tech.name}-${index}`}
-            className={`flex-shrink-0 px-4 py-2 border ${getTechColor(tech.category)} rounded-md cursor-pointer transition-all duration-200 transform hover:scale-110 relative`}
+            className={`inline-block px-4 py-2 border ${getTechColor(tech.category)} rounded-md cursor-pointer transition-all duration-200 transform hover:scale-110 relative`}
             onMouseEnter={() => handleTechHover(tech.name)}
             onMouseLeave={handleTechLeave}
           >
