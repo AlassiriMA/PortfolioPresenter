@@ -1,35 +1,38 @@
 import React from "react";
-import { MoveRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "../data/projects";
 
 const ProjectsSection: React.FC = () => {
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="section-title">Featured Projects</h2>
-          <div className="section-divider-center"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explore some of my recent projects showcasing my skills in full-stack development.
-          </p>
-        </div>
+    <section id="projects" className="section bg-secondary">
+      <div className="container">
+        <h2 className="section-title">Featured Projects</h2>
+        <div className="section-divider"></div>
+        <p className="text-muted-foreground max-w-2xl mb-12">
+          Explore some of my recent projects showcasing my skills in full-stack development and specialized domains.
+        </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid-container">
           {projects.map((project) => (
             <div 
               key={project.id}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1"
+              className="md:col-span-6 border border-border bg-white hover:border-primary transition-all"
             >
-              <div className="relative h-64">
-                <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                  {project.icon}
+              <div className="p-6 border-b border-border">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-medium">{project.title}</h3>
+                  <div className="p-2 bg-secondary flex items-center justify-center">
+                    {project.icon}
+                  </div>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-4 left-4 text-white">
+                <p className="text-sm text-muted-foreground mb-4 min-h-[80px]">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, index) => (
                     <span 
                       key={index}
-                      className={`px-2 py-1 ${index % 2 === 0 ? 'bg-blue-500/80' : 'bg-purple-500/80'} rounded text-xs font-medium ${index > 0 ? 'ml-2' : ''}`}
+                      className="px-2 py-0.5 bg-secondary text-xs"
                     >
                       {tech}
                     </span>
@@ -37,27 +40,35 @@ const ProjectsSection: React.FC = () => {
                 </div>
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-2">
-                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline font-medium">Live Demo</a>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:underline font-medium">GitHub</a>
-                  </div>
-                  <button className="text-purple-500 hover:text-blue-500 transition-colors" aria-label="View details">
-                    <MoveRight className="h-6 w-6" />
-                  </button>
-                </div>
+              <div className="flex border-t border-border divide-x divide-border">
+                <a 
+                  href={project.demo} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex-1 text-center p-3 text-xs font-medium hover:bg-secondary transition-colors flex items-center justify-center"
+                >
+                  View Demo <ArrowUpRight className="h-3 w-3 ml-1" />
+                </a>
+                <a 
+                  href={project.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex-1 text-center p-3 text-xs font-medium hover:bg-secondary transition-colors"
+                >
+                  Source Code
+                </a>
               </div>
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-10">
-          <a href="#" className="inline-block gradient-bg text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:translate-y-[-2px] transition-all">
+        <div className="text-center mt-12">
+          <a 
+            href="https://alassiri.nl" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block accent-bg px-6 py-3 text-sm font-medium"
+          >
             View All Projects
           </a>
         </div>
