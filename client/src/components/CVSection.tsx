@@ -1,87 +1,52 @@
 import React from "react";
-import { FileText, Download, Award, BookOpen, Code } from "lucide-react";
+import { ArrowDown, FileText } from "lucide-react";
 
 const CVSection: React.FC = () => {
   return (
-    <section id="cv" className="section">
-      <div className="container">
-        <h2 className="section-title">CV & Qualifications</h2>
+    <section id="cv" className="section bg-white">
+      <div className="container max-w-7xl">
+        <h2 className="section-title">Curriculum Vitae</h2>
         <div className="section-divider"></div>
-        <p className="text-muted-foreground max-w-2xl mb-12">
-          An overview of my professional journey, expertise, and educational background. Download my full CV for complete details.
-        </p>
         
-        <div className="grid-container gap-y-8">
-          <div className="md:col-span-4">
-            <div className="flex items-center mb-4">
-              <Award className="h-5 w-5 text-primary mr-2" />
-              <h3 className="text-lg font-medium">Professional Experience</h3>
-            </div>
-            <ul className="text-sm space-y-4">
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Operations Manager</span>
-                <span className="text-muted-foreground">Lenador Systems | 2020 - Present</span>
-              </li>
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Full-Stack Developer</span>
-                <span className="text-muted-foreground">Freelance | 2020 - Present</span>
-              </li>
-            </ul>
+        <div className="grid-container">
+          <div className="md:col-span-6">
+            <h3 className="text-2xl font-medium mb-6">Professional Summary</h3>
+            <p className="text-lg text-muted-foreground mb-6">
+              Full Stack Developer and technology enthusiast with experience in building modern web applications, 
+              cloud infrastructure solutions, and integrating AI capabilities into software products.
+            </p>
+            <p className="text-lg text-muted-foreground mb-6">
+              Specialized in JavaScript/TypeScript ecosystem and React-based applications, 
+              with a strong understanding of backend development using Node.js, Express, and databases 
+              like PostgreSQL and MongoDB.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Passionate about clean code, automation, and creating intuitive user experiences.
+            </p>
           </div>
           
-          <div className="md:col-span-4">
-            <div className="flex items-center mb-4">
-              <BookOpen className="h-5 w-5 text-primary mr-2" />
-              <h3 className="text-lg font-medium">Education</h3>
+          <div className="md:col-span-6 mt-10 md:mt-0">
+            <div className="border border-border p-8 h-full flex flex-col justify-between bg-secondary/50">
+              <div>
+                <h3 className="text-2xl font-medium mb-6">Download CV</h3>
+                <p className="text-muted-foreground mb-8">
+                  For a more detailed overview of my experience, skills, and qualifications, 
+                  download my complete curriculum vitae in PDF format.
+                </p>
+              </div>
+              
+              <div className="flex justify-center">
+                <a 
+                  href="/assets/alassiri_cv_apr_25.pdf" 
+                  download 
+                  className="inline-flex items-center px-8 py-4 accent-bg gap-2 hover:opacity-90 transition-opacity"
+                >
+                  <FileText className="h-5 w-5" />
+                  <span className="font-medium">Download CV</span>
+                </a>
+              </div>
             </div>
-            <ul className="text-sm space-y-4">
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Knowledge Engineering</span>
-                <span className="text-muted-foreground">Maastricht University | Completed Coursework</span>
-              </li>
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Business Administration</span>
-                <span className="text-muted-foreground">Abu Dhabi University | Completed Coursework</span>
-              </li>
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Associate of Science in Tourism</span>
-                <span className="text-muted-foreground">The Intermediate Institute of Tourism & Hotel Management</span>
-              </li>
-            </ul>
           </div>
-          
-          <div className="md:col-span-4">
-            <div className="flex items-center mb-4">
-              <Code className="h-5 w-5 text-primary mr-2" />
-              <h3 className="text-lg font-medium">Certifications</h3>
-            </div>
-            <ul className="text-sm space-y-4">
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">CS50's Introduction to Computer Science</span>
-                <span className="text-muted-foreground">Harvard University (edX)</span>
-              </li>
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Google Cloud Certified Associate Cloud Engineer</span>
-                <span className="text-muted-foreground">Google</span>
-              </li>
-              <li className="border-l border-border pl-4 py-1">
-                <span className="font-medium block">Introduction to Gen AI</span>
-                <span className="text-muted-foreground">Microsoft</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="text-center mt-12">
-          <a 
-            href="/mohammad-alassiri-cv.pdf" 
-            download
-            className="inline-flex items-center bg-secondary text-foreground px-6 py-3 text-sm font-medium border border-transparent hover:border-primary transition-colors"
-          >
-            <FileText className="h-4 w-4 mr-2" />
-            Download Full CV
-            <Download className="h-4 w-4 ml-2" />
-          </a>
         </div>
       </div>
     </section>

@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <a href="#hero" className="font-medium text-lg tracking-tight">
-              Mohammad<span className="text-primary">.</span>
+            <a href="#hero" className="font-medium text-xl tracking-tight">
+              Mohammad A. Alassiri<span className="text-primary">.</span>
             </a>
           </div>
           

@@ -4,31 +4,31 @@ import { ArrowDown } from "lucide-react";
 const HeroSection: React.FC = () => {
   return (
     <section id="hero" className="section pt-32 md:pt-48">
-      <div className="container">
+      <div className="container max-w-7xl">
         <div className="grid-container items-center">
-          <div className="md:col-span-8 lg:col-span-7">
-            <div className="inline-flex items-center px-3 py-1 bg-secondary mb-6">
-              <span className="text-xs font-medium uppercase tracking-wider">Full Stack Developer</span>
+          <div className="md:col-span-9 lg:col-span-8">
+            <div className="inline-flex items-center px-4 py-2 bg-secondary mb-8">
+              <span className="text-sm font-medium uppercase tracking-wider">Full Stack Developer</span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight mb-8">
               Designing Systems.<br />Building <span className="text-primary">Solutions</span>.
             </h1>
             
-            <p className="text-muted-foreground text-lg max-w-lg mb-10">
-              I craft clean, scalable, and user-focused applications powered by modern web technologies.
+            <p className="text-muted-foreground text-xl md:text-2xl max-w-3xl mb-12 leading-relaxed">
+              I craft clean, scalable, and user-focused applications powered by modern web technologies and artificial intelligence.
             </p>
             
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-5">
               <a 
                 href="#projects" 
-                className="accent-bg px-6 py-3 font-medium text-sm"
+                className="accent-bg px-8 py-4 font-medium text-base"
               >
                 View Projects
               </a>
               <a 
                 href="#contact" 
-                className="bg-secondary text-foreground px-6 py-3 font-medium text-sm border border-transparent hover:border-primary transition-colors"
+                className="bg-secondary text-foreground px-8 py-4 font-medium text-base border border-transparent hover:border-primary transition-colors"
               >
                 Get In Touch
               </a>
@@ -36,9 +36,9 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
         
-        <div className="hidden md:flex w-full justify-center mt-24">
+        <div className="hidden md:flex w-full justify-center mt-32">
           <a href="#about" className="text-muted-foreground hover:text-primary transition-colors">
-            <ArrowDown className="h-6 w-6 animate-bounce" />
+            <ArrowDown className="h-8 w-8 animate-bounce" />
           </a>
         </div>
       </div>

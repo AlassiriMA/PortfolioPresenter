@@ -59,8 +59,8 @@ const Header: React.FC = () => {
       scrolled ? "bg-white/95 backdrop-blur-sm border-b border-border" : "bg-white"
     }`}>
       <div className="container py-4 flex justify-between items-center">
-        <a href="#hero" className="font-medium text-xl tracking-tight">
-          Mohammad<span className="text-primary">.</span>
+        <a href="#hero" className="font-medium text-xl md:text-2xl tracking-tight">
+          Mohammad A. Alassiri<span className="text-primary">.</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -102,14 +102,14 @@ const Header: React.FC = () => {
         } overflow-hidden`}
       >
         <div className="container py-4">
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`block text-sm transition-all ${
-                    activeSection === link.id ? "text-primary" : ""
+                  className={`block text-lg transition-all ${
+                    activeSection === link.id ? "text-primary font-medium" : ""
                   }`}
                 >
                   {link.name}
