@@ -27,52 +27,52 @@ const TechGrid: React.FC<TechGridProps> = ({
     setHoveredTech(null);
   };
   
-  // Get the appropriate background color based on category
-  const getCategoryColor = (category: string) => {
+  // Get the appropriate styling based on category
+  const getTechStyles = (category: string) => {
+    const baseClasses = "border-2 shadow-md rounded-md cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg";
+    
     switch (category) {
       case 'frontend':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-primary/5 text-primary border-primary/30 hover:border-primary`;
       case 'backend':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-primary/5 text-primary border-primary/30 hover:border-primary`;
       case 'database':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-primary/5 text-primary border-primary/30 hover:border-primary`;
       case 'devops':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-accent/5 gold-text border-accent/30 hover:border-accent`;
       case 'cloud':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-accent/5 gold-text border-accent/30 hover:border-accent`;
       case 'ai-ml':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-accent/5 gold-text border-accent/30 hover:border-accent`;
       case 'mobile':
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-primary/5 text-primary border-primary/30 hover:border-primary`;
       default:
-        return 'bg-primary/10 text-primary';
+        return `${baseClasses} bg-primary/5 text-primary border-primary/30 hover:border-primary`;
     }
   };
 
   return (
-    <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 ${className}`}>
+    <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 ${className}`}>
       {filteredTechs.map((tech, index) => (
         <div
           key={`${tech.name}-${index}`}
-          className={`flex items-center justify-center px-3 py-2 border-2 border-accent ${getCategoryColor(tech.category)} 
-            shadow-md rounded-lg cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-lg 
-            hover:border-accent/80 relative text-center h-[42px]`}
+          className={`flex items-center justify-center px-3 py-2 ${getTechStyles(tech.category)} relative text-center h-[40px]`}
           onMouseEnter={() => handleTechHover(tech.name)}
           onMouseLeave={handleTechLeave}
         >
-          <span className="whitespace-nowrap font-bold">{tech.name}</span>
+          <span className="whitespace-nowrap font-bold text-sm">{tech.name}</span>
           
           {/* Tooltip that shows on hover */}
           {hoveredTech === tech.name && (
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 
+            <div className="absolute -bottom-1 left-1/2 transform translate-y-full -translate-x-1/2
               bg-white border-2 border-accent rounded-lg shadow-xl p-4 z-10 w-64">
               <div className="flex flex-col">
                 <span className="font-black text-primary text-lg">{tech.name}</span>
                 <span className="text-xs uppercase gold-text mb-2 font-bold">{tech.category.replace('-', ' & ')}</span>
                 <span className="text-sm text-gray-700">{tech.description}</span>
               </div>
-              <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 rotate-45 
-                w-4 h-4 bg-white border-r-2 border-b-2 border-accent"></div>
+              <div className="absolute top-[-8px] left-1/2 transform -translate-x-1/2 -rotate-45 
+                w-4 h-4 bg-white border-l-2 border-t-2 border-accent"></div>
             </div>
           )}
         </div>

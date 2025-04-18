@@ -66,11 +66,8 @@ const SkillsSection: React.FC = () => {
         </div>
         
         <div className="mb-16 mt-24 bg-gradient-to-r from-primary/5 to-accent/5 p-8 rounded-lg shadow-md border border-accent">
-          <div className="text-center mb-8">
-            <h3 className="text-3xl font-black text-primary">
-              Expertise in <span className="gold-text">100+</span> Technologies
-            </h3>
-            <p className="text-muted-foreground text-lg mt-4">
+          <div className="text-center mb-6">
+            <p className="text-muted-foreground text-lg">
               Browse my technology expertise by category
             </p>
           </div>
