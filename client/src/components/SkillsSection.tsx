@@ -2,7 +2,6 @@ import React from "react";
 import { Database, Globe, Layers, Server, Terminal } from "lucide-react";
 import { FaBrain } from "react-icons/fa";
 import { technologiesByCategory } from "@/data/technologies";
-import TechTabs from "./TechTabs";
 
 const categories = [
   { 
@@ -50,7 +49,7 @@ const SkillsSection: React.FC = () => {
         <h2 className="section-title">Technology Stack</h2>
         <div className="section-divider"></div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
           {categories.map((category, index) => (
             <div 
               key={index} 
@@ -63,16 +62,6 @@ const SkillsSection: React.FC = () => {
               <p className="text-lg gold-text font-bold">{category.count} <span className="text-muted-foreground font-normal text-base">Technologies</span></p>
             </div>
           ))}
-        </div>
-        
-        <div className="mb-16 mt-24 bg-gradient-to-r from-primary/5 to-accent/5 p-8 rounded-lg shadow-md border border-accent">
-          <div className="text-center mb-6">
-            <p className="text-muted-foreground text-lg">
-              Browse my technology expertise by category
-            </p>
-          </div>
-          
-          <TechTabs />
         </div>
         
         <div className="text-center mt-16 p-6">
