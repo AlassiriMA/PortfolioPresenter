@@ -89,7 +89,18 @@ function copyBuiltFiles() {
       };
       copyDirRecursive(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      // For HTML files, remove the Replit development banner
+      if (entry.name.endsWith('.html')) {
+        let content = fs.readFileSync(srcPath, 'utf8');
+        // Remove the Replit development banner script
+        content = content.replace(
+          /<script.*?src="https:\/\/replit\.com\/public\/js\/replit-dev-banner\.js".*?><\/script>/g, 
+          ''
+        );
+        fs.writeFileSync(destPath, content);
+      } else {
+        fs.copyFileSync(srcPath, destPath);
+      }
     }
   }
 }

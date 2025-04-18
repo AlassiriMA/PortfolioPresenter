@@ -1,3 +1,7 @@
+# robots.txt for Mohammad A. Alassiri's Portfolio Website
 User-agent: *
 Allow: /
+Disallow: /assets/
+
+# Sitemap location
 Sitemap: https://alassiri.nl/sitemap.xml
