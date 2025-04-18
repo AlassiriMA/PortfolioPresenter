@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Download, FileText } from "lucide-react";
 import cvPdfPath from "@assets/alassiri_cv_apr_25.pdf";
 
 const CVSection: React.FC = () => {
+  // Track CV download for analytics
+  const trackCVDownload = useCallback(() => {
+    try {
+      // Send analytics event for CV download
+      const gtag = (window as any).gtag;
+      if (typeof gtag === 'function') {
+        gtag('event', 'cv_download', {
+          'event_category': 'engagement',
+          'event_label': 'CV Download',
+        });
+      }
+    } catch (error) {
+      // Silent fail for analytics
+      console.debug('Analytics tracking failed silently');
+    }
+  }, []);
+
   return (
     <section id="cv" className="section bg-white">
       <div className="container max-w-7xl">
@@ -42,8 +59,13 @@ const CVSection: React.FC = () => {
                 <a 
                   href={cvPdfPath}
                   download="Mohammad_Alassiri_CV.pdf"
+                  onClick={trackCVDownload}
                   className="inline-flex items-center px-10 py-5 gold-bg gap-3 hover:opacity-90 transition-opacity shadow-md"
                   aria-label="Download CV"
+                  onContextMenu={(e) => {
+                    // Right-click tracking
+                    trackCVDownload();
+                  }}
                 >
                   <Download className="h-6 w-6" />
                   <span className="font-black text-lg">Download CV</span>

@@ -7,7 +7,7 @@ This is a modern, responsive portfolio website for Mohammad A. Alassiri, designe
 - **Modern Design**: Clean, minimalist layout inspired by Swiss Design principles
 - **Responsive**: Fully responsive design that works on all devices
 - **Animated Components**: Smooth animations for enhanced user experience
-- **Scrolling Technology Display**: Dynamic showcase of technology stack
+- **Technology Categories**: Organized display of technology skills
 - **Project Portfolio**: Showcasing development projects with details
 - **Contact Form**: Built-in contact functionality 
 - **Analytics**: Basic visitor tracking and analytics

@@ -18,7 +18,8 @@ GitHub Pages is the recommended deployment platform for this portfolio site. It 
 
 - A GitHub account
 - Git installed on your local machine
-- Node.js and npm installed
+- Node.js (v18+) and npm installed
+- The `gh-pages` npm package (installed via `npm install -g gh-pages`)
 
 ### Steps for GitHub Pages Deployment
 
