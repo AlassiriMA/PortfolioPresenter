@@ -1,0 +1,16 @@
+{
+  "name": "Mohammad A. Alassiri | Full Stack Developer",
+  "short_name": "Alassiri Portfolio",
+  "description": "Professional portfolio of Mohammad A. Alassiri, Full Stack Developer specializing in modern web technologies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1D7A54",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

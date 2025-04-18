@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alassiri.nl/sitemap.xml
