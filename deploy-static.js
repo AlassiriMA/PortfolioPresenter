@@ -83,20 +83,36 @@ function copyBuiltFiles() {
             fs.mkdirSync(destFilePath, { recursive: true });
             copyDirRecursive(srcFilePath, destFilePath);
           } else {
-            fs.copyFileSync(srcFilePath, destFilePath);
+            if (dirEntry.name.endsWith('.js') || dirEntry.name.endsWith('.css')) {
+              // Fix path issues for assets in JS and CSS files
+              let content = fs.readFileSync(srcFilePath, 'utf8');
+              
+              // Replace absolute paths with relative paths for Github Pages compatibility
+              // This is a hack but works for most cases when deploying to GitHub Pages
+              content = content.replace(/\/assets\//g, './assets/');
+              
+              fs.writeFileSync(destFilePath, content);
+            } else {
+              fs.copyFileSync(srcFilePath, destFilePath);
+            }
           }
         }
       };
       copyDirRecursive(srcPath, destPath);
     } else {
-      // For HTML files, remove the Replit development banner
+      // Process HTML and other files
       if (entry.name.endsWith('.html')) {
         let content = fs.readFileSync(srcPath, 'utf8');
+        
         // Remove the Replit development banner script
         content = content.replace(
           /<script.*?src="https:\/\/replit\.com\/public\/js\/replit-dev-banner\.js".*?><\/script>/g, 
           ''
         );
+        
+        // Fix script and asset paths for GitHub Pages compatibility
+        content = content.replace(/(src|href)="\//g, '$1="./');
+        
         fs.writeFileSync(destPath, content);
       } else {
         fs.copyFileSync(srcPath, destPath);
@@ -119,7 +135,7 @@ function createGitHubPagesFiles() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found | Mohammad A. Alassiri</title>
-  <meta http-equiv="refresh" content="0;url=/" />
+  <meta http-equiv="refresh" content="0;url=./" />
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -156,7 +172,7 @@ function createGitHubPagesFiles() {
   <div class="container">
     <h1>Page Not Found</h1>
     <p>The page you are looking for doesn't exist or has been moved.</p>
-    <p>Redirecting to the <a href="/">home page</a>...</p>
+    <p>Redirecting to the <a href="./">home page</a>...</p>
   </div>
 </body>
 </html>`;

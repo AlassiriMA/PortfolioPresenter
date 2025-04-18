@@ -138,14 +138,23 @@ To use a custom domain with your GitHub Pages deployment:
 1. **404 error after deployment**:
    - Make sure the GitHub Pages source is set to the correct branch
    - Check if the `index.html` file is in the root of the `gh-pages` branch
+   - Make sure your repository settings have GitHub Pages enabled
 
-2. **Missing assets or broken links**:
+2. **White screen or site not rendering after deployment**:
+   - This is usually caused by path issues in the build files
+   - Our deployment scripts attempt to fix this by converting absolute paths to relative ones
+   - If issues persist, you may need to edit the `deploy-static.js` and add additional path replacements
+   - Common fix: changing `/assets/` to `./assets/` in JS and CSS files
+
+3. **Missing assets or broken links**:
    - Ensure all paths in the code are relative, not absolute
    - Verify that all assets are properly copied to the `static-build` directory
+   - For GitHub Pages subpath hosting, always use relative paths (starting with `./`)
 
-3. **Styling issues in production**:
+4. **Styling issues in production**:
    - Clear browser cache
    - Check for CSS minification issues
+   - Inspect browser console for failed resource loading
 
 ### Getting Help
 

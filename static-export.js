@@ -30,7 +30,25 @@ function copyDirectory(src, dest) {
       fs.mkdirSync(destPath, { recursive: true });
       copyDirectory(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      if (entry.name.endsWith('.html')) {
+        // Process HTML files - fix paths for GitHub Pages
+        let content = fs.readFileSync(srcPath, 'utf8');
+        // Fix relative paths for scripts, styles, and links
+        content = content.replace(/(src|href)="\//g, '$1="./');
+        // Remove Replit banner script
+        content = content.replace(
+          /<script.*?src="https:\/\/replit\.com\/public\/js\/replit-dev-banner\.js".*?><\/script>/g,
+          ''
+        );
+        fs.writeFileSync(destPath, content);
+      } else if (entry.name.endsWith('.js') || entry.name.endsWith('.css')) {
+        // Fix asset paths in JS and CSS files
+        let content = fs.readFileSync(srcPath, 'utf8');
+        content = content.replace(/\/assets\//g, './assets/');
+        fs.writeFileSync(destPath, content);
+      } else {
+        fs.copyFileSync(srcPath, destPath);
+      }
     }
   }
 }
@@ -43,7 +61,7 @@ function create404Page() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found | Mohammad A. Alassiri</title>
-  <meta http-equiv="refresh" content="0;url=/" />
+  <meta http-equiv="refresh" content="0;url=./" />
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -80,7 +98,7 @@ function create404Page() {
   <div class="container">
     <h1>Page Not Found</h1>
     <p>The page you are looking for doesn't exist or has been moved.</p>
-    <p>Redirecting to the <a href="/">home page</a>...</p>
+    <p>Redirecting to the <a href="./">home page</a>...</p>
   </div>
 </body>
 </html>`;
