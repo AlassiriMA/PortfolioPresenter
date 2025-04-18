@@ -167,21 +167,37 @@ function createGitHubPagesFiles() {
   // fs.writeFileSync(path.join(outputDir, 'CNAME'), 'your-domain.com');
 }
 
+// Update Browserslist database
+async function updateBrowserslist() {
+  console.log('🔄 Updating Browserslist database...');
+  try {
+    await execCommand('npx update-browserslist-db@latest');
+    console.log('✅ Browserslist database updated successfully');
+    return true;
+  } catch (error) {
+    console.warn('⚠️ Failed to update Browserslist database, continuing anyway:', error);
+    return false;
+  }
+}
+
 // Main function
 async function main() {
   console.log('🚀 Starting static site generation process');
   
-  // Step 1: Build the project
+  // Step 1: Update Browserslist database
+  await updateBrowserslist();
+  
+  // Step 2: Build the project
   const buildSuccess = await buildProject();
   if (!buildSuccess) {
     console.error('❌ Stopping process due to build failure');
     process.exit(1);
   }
   
-  // Step 2: Create output directory
+  // Step 3: Create output directory
   createOutputDir();
   
-  // Step 3: Copy built files
+  // Step 4: Copy built files
   try {
     copyBuiltFiles();
   } catch (error) {
@@ -189,7 +205,7 @@ async function main() {
     process.exit(1);
   }
   
-  // Step 4: Create GitHub Pages files
+  // Step 5: Create GitHub Pages files
   createGitHubPagesFiles();
   
   // Done!
@@ -200,6 +216,11 @@ async function main() {
   console.log('2. Push the contents to the gh-pages branch of your repository');
   console.log('\nOr use gh-pages package:');
   console.log('npx gh-pages -d static-build');
+  
+  console.log('\n📝 Next steps:');
+  console.log('1. Verify the static build by opening index.html in a browser');
+  console.log('2. Check all links and interactions work correctly');
+  console.log('3. Test on multiple devices and browsers if possible');
 }
 
 // Run the main function

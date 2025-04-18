@@ -1,72 +1,54 @@
 #!/bin/bash
 
-# Stop on errors
-set -e
+# Portfolio Website Deployment Script
+# This script automates the complete process of deploying the portfolio website to GitHub Pages
 
-echo "🔧 Building the project for production..."
+# Display colored output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo -e "${BLUE}======================================================${NC}"
+echo -e "${GREEN}Mohammad A. Alassiri Portfolio - Deployment Script${NC}"
+echo -e "${BLUE}======================================================${NC}"
+
+# Step 1: Update browserslist database
+echo -e "\n${YELLOW}Step 1: Updating browserslist database...${NC}"
+npx update-browserslist-db@latest
+
+# Step 2: Clean and build the project
+echo -e "\n${YELLOW}Step 2: Building project for production...${NC}"
 npm run build
+if [ $? -ne 0 ]; then
+  echo -e "${RED}Build failed! Please fix the errors and try again.${NC}"
+  exit 1
+else
+  echo -e "${GREEN}Build successful!${NC}"
+fi
 
-echo "📦 Preparing for GitHub Pages deployment..."
+# Step 3: Generate the static site
+echo -e "\n${YELLOW}Step 3: Generating static site...${NC}"
+node deploy-static.js
+if [ $? -ne 0 ]; then
+  echo -e "${RED}Static site generation failed!${NC}"
+  exit 1
+else
+  echo -e "${GREEN}Static site generated successfully!${NC}"
+fi
 
-# Create a GitHub Pages deployment
-cd dist/public
+# Step 4: Deploy to GitHub Pages (if gh-pages is installed)
+echo -e "\n${YELLOW}Step 4: Deploying to GitHub Pages...${NC}"
+if npx gh-pages -d static-build; then
+  echo -e "${GREEN}Deployment successful!${NC}"
+  echo -e "${BLUE}Your site should be available at your GitHub Pages URL shortly.${NC}"
+else
+  echo -e "${RED}Deployment failed. Please check if gh-pages is installed:${NC}"
+  echo -e "${YELLOW}npm install -g gh-pages${NC}"
+  echo -e "${RED}Or deploy manually:${NC}"
+  echo -e "${YELLOW}npx gh-pages -d static-build${NC}"
+fi
 
-# Create a .nojekyll file to prevent Jekyll processing
-touch .nojekyll
-
-# Create CNAME file if you have a custom domain
-# echo "your-domain.com" > CNAME
-
-# Create a basic 404 page
-cat > 404.html << EOL
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | Mohammad A. Alassiri</title>
-  <meta http-equiv="refresh" content="0;url=/" />
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #f8f9fa;
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 500px;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      margin-bottom: 1.5rem;
-    }
-    a {
-      color: #10b981;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Page Not Found</h1>
-    <p>The page you are looking for doesn't exist or has been moved.</p>
-    <p>Redirecting to the <a href="/">home page</a>...</p>
-  </div>
-</body>
-</html>
-EOL
-
-echo "🚀 Ready for deployment!"
-echo "To deploy to GitHub Pages, run: npx gh-pages -d dist/public"
+echo -e "\n${GREEN}Deployment process completed!${NC}"
+echo -e "${BLUE}======================================================${NC}"

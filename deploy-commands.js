@@ -13,115 +13,56 @@
  * 3. Provide deployment commands
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
-
-// Get the directory name
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const publicDir = path.join(__dirname, 'dist', 'public');
-
-// Check if the build directory exists
-if (!fs.existsSync(publicDir)) {
-  console.error('\x1b[31m%s\x1b[0m', 'Error: Build directory not found!');
-  console.log('Please run \x1b[33mnpm run build\x1b[0m first before deploying.');
-  process.exit(1);
-}
-
-// Create necessary files for GitHub Pages
 function prepareForGitHubPages() {
-  console.log('\x1b[36m%s\x1b[0m', '📦 Preparing for GitHub Pages deployment...');
+  console.log('\n================================');
+  console.log('  GITHUB PAGES DEPLOYMENT GUIDE');
+  console.log('================================\n');
   
-  // Create .nojekyll file to prevent Jekyll processing
-  fs.writeFileSync(path.join(publicDir, '.nojekyll'), '');
-  console.log('✅ Created .nojekyll file');
+  console.log('Follow these steps to deploy your portfolio to GitHub Pages:\n');
   
-  // Create 404.html
-  const html404 = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Page Not Found | Mohammad A. Alassiri</title>
-  <meta http-equiv="refresh" content="0;url=/" />
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #f8f9fa;
-      color: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 500px;
-      padding: 2rem;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      margin-bottom: 1.5rem;
-    }
-    a {
-      color: #10b981;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Page Not Found</h1>
-    <p>The page you are looking for doesn't exist or has been moved.</p>
-    <p>Redirecting to the <a href="/">home page</a>...</p>
-  </div>
-</body>
-</html>`;
-
-  fs.writeFileSync(path.join(publicDir, '404.html'), html404);
-  console.log('✅ Created 404.html page');
-  
-  // Create CNAME file if you have a custom domain (commented out by default)
-  // fs.writeFileSync(path.join(publicDir, 'CNAME'), 'your-custom-domain.com');
-  // console.log('✅ Created CNAME file for custom domain');
-}
-
-// Display deployment instructions
-function showDeploymentInstructions() {
-  console.log('\n\x1b[32m%s\x1b[0m', '🚀 Ready for deployment!');
-  console.log('\nYou can now deploy to GitHub Pages using one of these methods:');
-  
-  console.log('\n\x1b[33m%s\x1b[0m', '1. Using gh-pages package (recommended):');
-  console.log('   npx gh-pages -d dist/public');
-  
-  console.log('\n\x1b[33m%s\x1b[0m', '2. Manual deployment:');
-  console.log('   cd dist/public');
-  console.log('   git init');
+  console.log('1. Update your repository');
   console.log('   git add .');
-  console.log('   git commit -m "Deploy to GitHub Pages"');
-  console.log('   git branch -M gh-pages');
-  console.log('   git remote add origin https://github.com/yourusername/your-repository.git');
-  console.log('   git push -f origin gh-pages');
+  console.log('   git commit -m "Update website content"');
+  console.log('   git push origin main\n');
   
-  console.log('\n\x1b[36m%s\x1b[0m', 'Once deployed, your site will be available at:');
-  console.log('https://yourusername.github.io/your-repository/');
+  console.log('2. Run the deployment scripts');
+  console.log('   bash deploy.sh');
+  console.log('   OR run individual steps:');
+  console.log('   npm run build');
+  console.log('   node deploy-static.js');
+  console.log('   npx gh-pages -d static-build\n');
+  
+  console.log('3. Check deployment status');
+  console.log('   - Go to your GitHub repository');
+  console.log('   - Click on "Actions" tab');
+  console.log('   - Wait for the "pages build and deployment" workflow to complete\n');
+  
+  console.log('4. Visit your deployed site');
+  console.log('   - GitHub Pages URL: https://[username].github.io/[repository-name]/');
+  console.log('   - Or your custom domain if configured\n');
+  
+  console.log('5. For custom domain setup:');
+  console.log('   - Uncomment the CNAME line in deploy-static.js');
+  console.log('   - Add your domain in the CNAME file');
+  console.log('   - Configure DNS settings with your domain provider\n');
+  
+  console.log('For more details, refer to DEPLOYMENT.md');
 }
 
-// Main execution
-try {
-  prepareForGitHubPages();
-  showDeploymentInstructions();
-} catch (error) {
-  console.error('\x1b[31m%s\x1b[0m', 'Error preparing for deployment:', error);
-  process.exit(1);
+function showDeploymentInstructions() {
+  console.log('\n= = = = = = = = = = = = = = = = = = = = = = = = = = = = = =');
+  console.log('  Mohammad A. Alassiri - Portfolio Website Deployment');
+  console.log('= = = = = = = = = = = = = = = = = = = = = = = = = = = = = =\n');
+  
+  console.log('To deploy the complete portfolio website to GitHub Pages:');
+  console.log('1. Run the deploy.sh script: bash deploy.sh');
+  console.log('2. The site will be available at your GitHub Pages URL\n');
+  
+  console.log('For more detailed instructions:');
+  console.log('- Review DEPLOYMENT.md for complete deployment documentation');
+  console.log('- Run node deploy-static.js for static site generation only');
 }
+
+// Execute functions
+prepareForGitHubPages();
+showDeploymentInstructions();
