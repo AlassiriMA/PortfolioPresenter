@@ -1,0 +1,60 @@
+You're helping me finalize and production-optimize a static portfolio site built with React, Vite, TypeScript, TailwindCSS, and Swiss-style UI.
+
+---
+
+🎯 GOAL: Make the site production-ready with:
+
+1. ✅ **SEO Enhancements**
+   - Create a valid `sitemap.xml` file at the root, listing all major URLs (home, about, skills, projects, contact)
+   - Create a `robots.txt` that:
+     ```
+     User-agent: *
+     Allow: /
+     Sitemap: https://alassiri.nl/sitemap.xml
+     ```
+
+2. ✅ **Favicon Support**
+   - Add a favicon in `.ico` and `.png` formats
+   - Link it properly in `index.html`:
+     ```html
+     <link rel="icon" type="image/png" href="/favicon.png">
+     ```
+   - Use a tool like [realfavicongenerator.net](https://realfavicongenerator.net) to generate a full set if needed
+
+3. ✅ **Analytics Integration**
+   - Build and integrate a **lightweight visitor tracker**:
+     - No third-party dependencies
+     - Count page views using localStorage + fetch to a Replit-hosted tiny Node.js API
+     - Show visit count or keep it silent
+     - Use a single route like `/api/track` on the backend
+     - Use SQLite or a flat JSON file for storage
+     - Optional: simple admin route to view logs
+
+4. ✅ **Make Everything Production Ready**
+   - Optimize Vite config (`base`, `build`, etc.)
+   - Ensure the site works well when hosted on GitHub Pages
+   - Apply final accessibility (a11y) and performance checks (e.g., lazy images, aria tags, semantic elements)
+   - Minify all assets on build
+   - Confirm contact form submits to `https://formspree.io/f/mldjydvd`
+   - Add a `download CV` button that links to a real PDF file
+
+5. ✅ **Project Hosting**
+   - Set it up for easy GitHub Pages deployment via:
+     - Vite `base` config
+     - `gh-pages` npm script (`predeploy` and `deploy`)
+   - Add `.nojekyll` to bypass Jekyll processing
+
+6. ✅ **Nice-to-haves**
+   - Add social sharing meta tags (Open Graph)
+   - Use `manifest.webmanifest` for PWA-style head tags (name, icon, theme color)
+   - Provide fallback text/fonts if necessary
+
+---
+
+💡 Notes:
+- Make sure the whole site remains lightweight, clean, and fast
+- Match the Swiss style: white background, clean lines, geometric structure, good rhythm
+- Prioritize accessibility (keyboard nav, contrast, alt text)
+- Let me download and test the final `dist/` folder
+
+Thanks!

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { allTechnologies } from '../data/technologies';
+import { allTechnologies } from '@/data/technologies';
 
 interface TechScrollerProps {
   direction?: 'left' | 'right';
@@ -14,11 +14,18 @@ const TechScroller: React.FC<TechScrollerProps> = ({
 }) => {
   const [hoveredTech, setHoveredTech] = useState<string | null>(null);
   
-  // Get a subset of technologies for this row
-  const technologies = allTechnologies.slice(
-    direction === 'left' ? 0 : Math.floor(allTechnologies.length / 2), 
-    direction === 'left' ? Math.floor(allTechnologies.length / 2) : allTechnologies.length
-  );
+  // Create specific tech subsets to avoid overwhelming the display
+  const frontendTechs = allTechnologies.filter(tech => tech.category === 'frontend').slice(0, 15);
+  const backendTechs = allTechnologies.filter(tech => tech.category === 'backend').slice(0, 15);
+  const databaseTechs = allTechnologies.filter(tech => tech.category === 'database').slice(0, 8);
+  const devopsTechs = allTechnologies.filter(tech => tech.category === 'devops').slice(0, 8);
+  const cloudTechs = allTechnologies.filter(tech => tech.category === 'cloud').slice(0, 8);
+  const aimlTechs = allTechnologies.filter(tech => tech.category === 'ai-ml').slice(0, 10);
+  
+  // Combine technologies based on direction
+  const technologies = direction === 'left'
+    ? [...frontendTechs, ...backendTechs, ...databaseTechs]
+    : [...devopsTechs, ...cloudTechs, ...aimlTechs];
 
   const handleTechHover = (techName: string) => {
     setHoveredTech(techName);
@@ -28,40 +35,34 @@ const TechScroller: React.FC<TechScrollerProps> = ({
     setHoveredTech(null);
   };
   
-  // Return the appropriate design based on category
-  const getTechClass = (category: string) => {
-    const baseClass = "bg-white border-accent"; // Common styles
-    
+  // Get the appropriate background color based on category
+  const getCategoryColor = (category: string) => {
     switch (category) {
       case 'frontend':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'backend':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'database':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'devops':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'cloud':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'ai-ml':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       case 'mobile':
-        return `${baseClass} text-primary`;
-      case 'other':
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
       default:
-        return `${baseClass} text-primary`;
+        return 'bg-primary/10 text-primary';
     }
   };
-
-  const animationDuration = `${Math.max(40, technologies.length * (speed / 10))}s`;
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <div
-        className={`flex gap-4 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}
+        className={`flex gap-5 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}
         style={{
-          animationDuration,
+          animationDuration: `${technologies.length * 2}s`,
           animationPlayState: hoveredTech ? 'paused' : 'running',
         }}
       >
@@ -69,7 +70,7 @@ const TechScroller: React.FC<TechScrollerProps> = ({
         {[...technologies, ...technologies].map((tech, index) => (
           <div
             key={`${tech.name}-${index}`}
-            className={`inline-flex px-4 py-2 border-2 ${getTechClass(tech.category)} shadow-md rounded-full cursor-pointer transition-all duration-200 transform hover:scale-110 hover:border-accent hover:shadow-lg relative`}
+            className={`inline-flex items-center px-4 py-2 border-2 border-accent ${getCategoryColor(tech.category)} shadow-md rounded-full cursor-pointer transition-all duration-200 hover:scale-110 hover:shadow-lg hover:border-accent/80 relative`}
             onMouseEnter={() => handleTechHover(tech.name)}
             onMouseLeave={handleTechLeave}
           >
