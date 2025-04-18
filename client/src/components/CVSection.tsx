@@ -1,5 +1,6 @@
 import React from "react";
 import { Download, FileText } from "lucide-react";
+import cvPdfPath from "@assets/alassiri_cv_apr_25.pdf";
 
 const CVSection: React.FC = () => {
   return (
@@ -39,9 +40,10 @@ const CVSection: React.FC = () => {
               
               <div className="flex justify-center">
                 <a 
-                  href="/assets/alassiri_cv_apr_25.pdf" 
-                  download 
+                  href={cvPdfPath}
+                  download="Mohammad_Alassiri_CV.pdf"
                   className="inline-flex items-center px-10 py-5 gold-bg gap-3 hover:opacity-90 transition-opacity shadow-md"
+                  aria-label="Download CV"
                 >
                   <Download className="h-6 w-6" />
                   <span className="font-black text-lg">Download CV</span>
