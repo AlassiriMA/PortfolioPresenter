@@ -90,6 +90,8 @@ function copyBuiltFiles() {
               // Replace absolute paths with relative paths for Github Pages compatibility
               // This is a hack but works for most cases when deploying to GitHub Pages
               content = content.replace(/\/assets\//g, './assets/');
+              // Also handle paths without leading slash for mobile compatibility
+              content = content.replace(/(['"(])assets\//g, '$1./assets/');
               
               fs.writeFileSync(destFilePath, content);
             } else {
@@ -113,6 +115,9 @@ function copyBuiltFiles() {
         // Fix script and asset paths for GitHub Pages compatibility
         content = content.replace(/(src|href)="\//g, '$1="./');
         
+        // Also handle paths without leading slash for mobile compatibility
+        content = content.replace(/(src|href)="(?!http|https|\.\/|#)(.*?)"/g, '$1="./$2"');
+        
         fs.writeFileSync(destPath, content);
       } else {
         fs.copyFileSync(srcPath, destPath);
@@ -128,7 +133,7 @@ function createGitHubPagesFiles() {
   // Create .nojekyll file to prevent Jekyll processing
   fs.writeFileSync(path.join(outputDir, '.nojekyll'), '');
   
-  // Create a 404.html file
+  // Create a 404.html file with SPA navigation support
   const html404 = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,13 +165,28 @@ function createGitHubPagesFiles() {
       margin-bottom: 1.5rem;
     }
     a {
-      color: #10b981;
+      color: #1D7A54;
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
   </style>
+  <script>
+    // Handle SPA navigation for GitHub Pages
+    (function() {
+      // Redirect to the base path if we come from a direct URL
+      var segmentCount = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
@@ -179,8 +199,16 @@ function createGitHubPagesFiles() {
 
   fs.writeFileSync(path.join(outputDir, '404.html'), html404);
   
-  // Create CNAME file if needed
-  // fs.writeFileSync(path.join(outputDir, 'CNAME'), 'your-domain.com');
+  // Copy CNAME from public directory if it exists
+  const publicCnamePath = path.join(__dirname, 'public', 'CNAME');
+  if (fs.existsSync(publicCnamePath)) {
+    console.log('📋 Copying CNAME file for custom domain');
+    fs.copyFileSync(publicCnamePath, path.join(outputDir, 'CNAME'));
+  } else {
+    // Create CNAME file directly
+    console.log('📝 Creating CNAME file for custom domain');
+    fs.writeFileSync(path.join(outputDir, 'CNAME'), 'alassiri.nl');
+  }
 }
 
 // Update Browserslist database

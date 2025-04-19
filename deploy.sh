@@ -1,54 +1,49 @@
 #!/bin/bash
 
-# Portfolio Website Deployment Script
-# This script automates the complete process of deploying the portfolio website to GitHub Pages
-
-# Display colored output
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
+# Terminal colors
 RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}======================================================${NC}"
-echo -e "${GREEN}Mohammad A. Alassiri Portfolio - Deployment Script${NC}"
-echo -e "${BLUE}======================================================${NC}"
+echo -e "${BLUE}=== Starting Portfolio Website Deployment ===${NC}"
 
-# Step 1: Update browserslist database
-echo -e "\n${YELLOW}Step 1: Updating browserslist database...${NC}"
-npx update-browserslist-db@latest
+# Ensure we have latest dependencies
+echo -e "${YELLOW}Installing dependencies...${NC}"
+npm ci
 
-# Step 2: Clean and build the project
-echo -e "\n${YELLOW}Step 2: Building project for production...${NC}"
-npm run build
-if [ $? -ne 0 ]; then
-  echo -e "${RED}Build failed! Please fix the errors and try again.${NC}"
-  exit 1
-else
-  echo -e "${GREEN}Build successful!${NC}"
-fi
-
-# Step 3: Generate the static site
-echo -e "\n${YELLOW}Step 3: Generating static site...${NC}"
+# Build the project using the static-build script
+echo -e "${YELLOW}Building for production...${NC}"
 node deploy-static.js
-if [ $? -ne 0 ]; then
-  echo -e "${RED}Static site generation failed!${NC}"
+
+# Check if build was successful
+if [ ! -d "static-build" ]; then
+  echo -e "${RED}Build failed. Check errors above.${NC}"
   exit 1
-else
-  echo -e "${GREEN}Static site generated successfully!${NC}"
 fi
 
-# Step 4: Deploy to GitHub Pages (if gh-pages is installed)
-echo -e "\n${YELLOW}Step 4: Deploying to GitHub Pages...${NC}"
-if npx gh-pages -d static-build; then
-  echo -e "${GREEN}Deployment successful!${NC}"
-  echo -e "${BLUE}Your site should be available at your GitHub Pages URL shortly.${NC}"
+# Ensure CNAME file exists in the output directory
+echo -e "${YELLOW}Ensuring CNAME is present...${NC}"
+echo "alassiri.nl" > static-build/CNAME
+
+# Deploy to GitHub Pages
+echo -e "${YELLOW}Deploying to GitHub Pages...${NC}"
+npx gh-pages -d static-build
+
+# Check if deployment was successful
+if [ $? -eq 0 ]; then
+  echo -e "${GREEN}✅ Deployment successful!${NC}"
+  echo -e "${BLUE}The site will be available shortly at: https://alassiri.nl${NC}"
+  
+  echo -e "${YELLOW}⚠️ Important Notes:${NC}"
+  echo -e "1. ${YELLOW}If your custom domain is not working, go to GitHub repo > Settings > Pages${NC}"
+  echo -e "   ${YELLOW}and ensure your custom domain 'alassiri.nl' is still set.${NC}"
+  echo -e "2. ${YELLOW}It may take a few minutes for changes to propagate.${NC}"
+  echo -e "3. ${YELLOW}Clear your browser cache if you don't see updates.${NC}"
 else
-  echo -e "${RED}Deployment failed. Please check if gh-pages is installed:${NC}"
-  echo -e "${YELLOW}npm install -g gh-pages${NC}"
-  echo -e "${RED}Or deploy manually:${NC}"
-  echo -e "${YELLOW}npx gh-pages -d static-build${NC}"
+  echo -e "${RED}❌ Deployment failed. Check errors above.${NC}"
+  exit 1
 fi
 
-echo -e "\n${GREEN}Deployment process completed!${NC}"
-echo -e "${BLUE}======================================================${NC}"
+echo -e "${BLUE}=== Deployment process complete ===${NC}"

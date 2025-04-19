@@ -14,20 +14,25 @@ Before deploying, ensure the following:
 
 ## Deployment to GitHub Pages
 
-### Option 1: Using the Automatic Script
+### Option 1: Using the Automatic Script (Recommended)
 
 The easiest way to deploy is using the provided deployment script:
 
 ```bash
-# Build and deploy the site
-npm run deploy
+# Make the script executable if it's not already
+chmod +x deploy.sh
+
+# Run the deployment script
+./deploy.sh
 ```
 
 This script will:
-1. Build the site for production
-2. Prepare all assets for GitHub Pages
-3. Push the built files to the `gh-pages` branch
-4. Deploy the site to GitHub Pages
+1. Install dependencies
+2. Build the site for production
+3. Prepare all assets for GitHub Pages
+4. Ensure the CNAME file is correctly set to preserve your custom domain
+5. Push the built files to the `gh-pages` branch
+6. Deploy the site to GitHub Pages
 
 ### Option 2: Manual Deployment
 
