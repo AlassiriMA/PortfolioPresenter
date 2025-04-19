@@ -29,13 +29,28 @@
       margin-bottom: 1.5rem;
     }
     a {
-      color: #10b981;
+      color: #1D7A54;
       text-decoration: none;
     }
     a:hover {
       text-decoration: underline;
     }
   </style>
+  <script>
+    // Handle SPA navigation for GitHub Pages
+    (function() {
+      // Redirect to the base path if we come from a direct URL
+      var segmentCount = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    })();
+  </script>
 </head>
 <body>
   <div class="container">
