@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowUpRight, Github } from "lucide-react";
+import { Github } from "lucide-react";
 import { projects } from "../data/projects";
 
 const ProjectsSection: React.FC = () => {
@@ -40,22 +40,14 @@ const ProjectsSection: React.FC = () => {
                 </div>
               </div>
               
-              <div className="flex border-t border-border divide-x divide-border mt-auto">
+              <div className="border-t border-border mt-auto">
                 <a 
-                  href={project.demo} 
+                  href="https://github.com/AlassiriMA" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="flex-1 text-center p-4 text-sm font-medium hover:bg-secondary transition-colors flex items-center justify-center"
+                  className="flex text-center p-4 text-sm font-medium hover:bg-secondary transition-colors items-center justify-center w-full"
                 >
-                  Live Demo <ArrowUpRight className="h-4 w-4 ml-1" />
-                </a>
-                <a 
-                  href={project.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex-1 text-center p-4 text-sm font-medium hover:bg-secondary transition-colors flex items-center justify-center"
-                >
-                  <Github className="h-4 w-4 mr-1" /> Source 
+                  <Github className="h-4 w-4 mr-1" /> View Source Code
                 </a>
               </div>
             </div>
