@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, MapPin, Github, Linkedin } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactSection: React.FC = () => {
@@ -144,8 +144,18 @@ const ContactSection: React.FC = () => {
                     <div>
                       <h3 className="text-lg font-medium mb-1">Location</h3>
                       <p className="text-sm text-muted-foreground">
-                        Maastricht, The Netherlands
+                        Banruwe, 6218VP Maastricht, The Netherlands
                       </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Phone className="h-5 w-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Phone</h3>
+                      <a href="tel:+31610979730" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                        +31 6 1097 9730
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -155,7 +165,7 @@ const ContactSection: React.FC = () => {
                     <h3 className="text-lg font-medium mb-4">Connect With Me</h3>
                     <div className="flex space-x-4">
                       <a 
-                        href="https://github.com" 
+                        href="https://github.com/AlassiriMA" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="p-2 border border-border hover:border-primary transition-colors"
@@ -164,7 +174,7 @@ const ContactSection: React.FC = () => {
                         <Github className="h-5 w-5" />
                       </a>
                       <a 
-                        href="https://linkedin.com" 
+                        href="https://www.linkedin.com/in/alassirima/" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="p-2 border border-border hover:border-primary transition-colors"

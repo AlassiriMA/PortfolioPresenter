@@ -12,7 +12,7 @@ const AboutSection: React.FC = () => {
           <div className="md:col-span-5 flex justify-center">
             <div className="max-w-[280px] rounded-full overflow-hidden border-4 border-accent shadow-xl">
               <img 
-                src="./assets/profile-image.jpg" 
+                src={import.meta.env.DEV ? "/assets/profile-image.jpg" : "./assets/profile-image.jpg"}
                 alt="Mohammad A. Alassiri" 
                 className="w-full h-full object-cover"
                 onError={(e) => {
