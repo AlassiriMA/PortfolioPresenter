@@ -1,169 +1,113 @@
-# Deployment Guide
+# Deployment Guide for Portfolio Website
 
-This document provides detailed instructions for deploying the Mohammad A. Alassiri portfolio website to various hosting platforms, with a focus on GitHub Pages.
+This document provides detailed instructions for deploying the portfolio website to GitHub Pages.
 
-## Table of Contents
+## Pre-Deployment Checklist
 
-1. [GitHub Pages Deployment](#github-pages-deployment)
-2. [Environment Preparation](#environment-preparation)
-3. [Using the Deployment Scripts](#using-the-deployment-scripts)
-4. [Custom Domain Configuration](#custom-domain-configuration)
-5. [Troubleshooting](#troubleshooting)
+Before deploying, ensure the following:
 
-## GitHub Pages Deployment
+1. All features are working as expected locally
+2. The site is responsive across different device sizes
+3. All links point to the correct URLs
+4. SVG assets are properly loading 
+5. Contact form is properly connected to Formspree
 
-GitHub Pages is the recommended deployment platform for this portfolio site. It provides free hosting for static websites directly from a GitHub repository.
+## Deployment to GitHub Pages
 
-### Prerequisites
+### Option 1: Using the Automatic Script
 
-- A GitHub account
-- Git installed on your local machine
-- Node.js (v18+) and npm installed
-- The `gh-pages` npm package (installed via `npm install -g gh-pages`)
+The easiest way to deploy is using the provided deployment script:
 
-### Steps for GitHub Pages Deployment
+```bash
+# Build and deploy the site
+npm run deploy
+```
 
-1. **Create a GitHub repository** (if you haven't already):
-   - Name it according to your preference (e.g., `alassiri-portfolio`)
-   - Make it public to use GitHub Pages for free
+This script will:
+1. Build the site for production
+2. Prepare all assets for GitHub Pages
+3. Push the built files to the `gh-pages` branch
+4. Deploy the site to GitHub Pages
 
-2. **Connect your local repository to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/yourusername/your-repository-name.git
-   git push -u origin main
-   ```
+### Option 2: Manual Deployment
 
-3. **Build the project**:
+If you prefer to deploy manually:
+
+1. Build the project:
    ```bash
    npm run build
    ```
 
-4. **Run the static site generator script**:
+2. Prepare the build for GitHub Pages:
    ```bash
    node deploy-static.js
    ```
-   This will create a `static-build` directory with all the necessary files for GitHub Pages.
 
-5. **Deploy to GitHub Pages**:
+3. Deploy to GitHub Pages:
    ```bash
-   npx gh-pages -d static-build
-   ```
-   This will push the contents of the `static-build` directory to the `gh-pages` branch of your repository.
+   # Initialize the gh-pages branch if it doesn't exist
+   git checkout -b gh-pages
 
-6. **Enable GitHub Pages** in your repository settings:
-   - Go to your repository on GitHub
-   - Navigate to Settings > Pages
-   - Under "Source", select the `gh-pages` branch
-   - Click "Save"
+   # Force add the contents of the dist directory to the gh-pages branch
+   git add -f dist
 
-7. **Wait for deployment** to complete (usually takes a few minutes)
-   - GitHub will provide you with a URL for your site (e.g., `https://yourusername.github.io/your-repository-name/`)
+   # Commit the changes
+   git commit -m "Deploy to GitHub Pages"
 
-## Environment Preparation
+   # Push the gh-pages branch to GitHub
+   git push -f origin gh-pages
 
-Before deploying, make sure your environment is properly configured:
-
-1. **Update environment variables**:
-   - Create a `.env` file for any environment-specific variables
-   - Ensure all API keys and credentials are properly configured
-
-2. **Test the production build locally**:
-   ```bash
-   npm run build
-   npm run start
+   # Return to the main branch
+   git checkout main
    ```
 
-3. **Check for any console errors** or warnings in the browser developer tools
+## Post-Deployment Verification
 
-## Using the Deployment Scripts
+After deployment, verify:
 
-This project includes two deployment scripts:
+1. The site is accessible at `https://alassirima.github.io/portfolio/` (or your custom domain)
+2. All assets (images, CSS, JS) load correctly
+3. Navigation works as expected
+4. The contact form submits successfully
 
-### 1. `deploy.sh` (Shell Script)
+## Troubleshooting Common Issues
 
-A simple shell script that builds the project and prepares it for GitHub Pages:
+### Issue: Assets not loading
 
-```bash
-chmod +x deploy.sh  # Make it executable (first time only)
-./deploy.sh
-```
+If assets aren't loading, check:
+- Asset paths are relative, not absolute
+- Path structure in the deployed version matches your local setup
+- Check browser console for 404 errors on specific files
 
-### 2. `deploy-static.js` (Node.js Script)
+### Issue: Page Not Found errors when navigating
 
-A more comprehensive Node.js script that handles the entire deployment process:
+For single-page applications on GitHub Pages, ensure:
+- You have a proper 404.html page redirect
+- The site properly handles client-side routing
+- Base path is correctly set in the router
 
-```bash
-node deploy-static.js
-```
+### Issue: Form submissions not working
 
-This script performs the following actions:
-- Builds the project for production
-- Creates a `static-build` directory
-- Copies all necessary files
-- Creates GitHub Pages specific files (.nojekyll, 404.html)
-- Provides deployment instructions
+Check:
+- Formspree is properly configured
+- CORS settings are correct
+- Form action URLs are correct
 
-## Custom Domain Configuration
+## Using a Custom Domain
 
-To use a custom domain with your GitHub Pages deployment:
+To use a custom domain with GitHub Pages:
 
-1. **Update the CNAME file** in the `deploy-static.js` script:
-   - Uncomment the CNAME creation line
-   - Replace `your-domain.com` with your actual domain
+1. In your GitHub repository, go to Settings > Pages
+2. Under "Custom domain", enter your domain name (e.g., alassiri.nl)
+3. Create or update DNS records with your domain registrar:
+   - Create an A record pointing to GitHub Pages IPs
+   - Or create a CNAME record pointing to your GitHub Pages URL
+4. Add a file named CNAME to the root of your build with your domain name
 
-2. **Configure DNS settings** with your domain provider:
-   - For an apex domain (e.g., `example.com`), create A records pointing to GitHub Pages IP addresses:
-     ```
-     185.199.108.153
-     185.199.109.153
-     185.199.110.153
-     185.199.111.153
-     ```
-   - For a subdomain (e.g., `www.example.com`), create a CNAME record pointing to `yourusername.github.io`
+## Maintenance
 
-3. **Update GitHub repository settings**:
-   - Go to Settings > Pages
-   - Enter your custom domain in the "Custom domain" field
-   - Click "Save"
-   - Check "Enforce HTTPS" for secure connections
-
-## Troubleshooting
-
-### Common Issues
-
-1. **404 error after deployment**:
-   - Make sure the GitHub Pages source is set to the correct branch
-   - Check if the `index.html` file is in the root of the `gh-pages` branch
-   - Make sure your repository settings have GitHub Pages enabled
-
-2. **White screen or site not rendering after deployment**:
-   - This is usually caused by path issues in the build files
-   - Our deployment scripts attempt to fix this by converting absolute paths to relative ones
-   - If issues persist, you may need to edit the `deploy-static.js` and add additional path replacements
-   - Common fix: changing `/assets/` to `./assets/` in JS and CSS files
-
-3. **Missing assets or broken links**:
-   - Ensure all paths in the code are relative, not absolute
-   - Verify that all assets are properly copied to the `static-build` directory
-   - For GitHub Pages subpath hosting, always use relative paths (starting with `./`)
-
-4. **Styling issues in production**:
-   - Clear browser cache
-   - Check for CSS minification issues
-   - Inspect browser console for failed resource loading
-
-### Getting Help
-
-If you encounter any issues with deployment:
-
-1. Check the GitHub Pages documentation: https://docs.github.com/en/pages
-2. Look at the repository issues section for similar problems
-3. Consult the README for project-specific guidance
-
----
-
-This deployment guide was last updated on April 18, 2024.
+Remember to periodically:
+- Update dependencies
+- Check for broken links
+- Verify form submissions still work
+- Refresh content as needed
